@@ -53,11 +53,11 @@ do
       local data = load_data(_config.moderation.data)
 
       -- create a group
-      if matches[1] == 'mkgroup' and matches[2] then
+      if matches[1] == 'mkgroup' and matches[2] and is_admin(msg) then
         create_group_chat (msg.from.print_name, matches[2], ok_cb, false)
 	      return 'Group '..string.gsub(matches[2], '_', ' ')..' has been created.'
       -- add a group to be moderated
-      elseif matches[1] == 'addgroup' then
+      elseif matches[1] == 'addgroup' and is_admin(msg) then
         if data[tostring(msg.to.id)] then
           return 'Group is already added.'
         end
